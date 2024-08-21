@@ -4,7 +4,6 @@ import InputLabel from "@/Components/InputLabel.jsx";
 import TextInput from "@/Components/TextInput.jsx";
 import InputError from "@/Components/InputError.jsx";
 import PrimaryButton from "@/Components/PrimaryButton.jsx";
-import {Transition} from "@headlessui/react";
 
 export default function AddEdit({category}) {
     const {data, setData, post, errors, processing} = useForm({
@@ -19,11 +18,10 @@ export default function AddEdit({category}) {
         post(categoryRoute);
     };
 
-
     return (
         <AuthenticatedLayout>
             <Head title={category ? 'Edit category' : 'Add category'}/>
-            <div>
+            <div className={'w-full'}>
                 <div className="py-4 px-4">
                     <div className={'text-xl font-bold'}>{category ? 'Edit category' : 'Add category'}</div>
 

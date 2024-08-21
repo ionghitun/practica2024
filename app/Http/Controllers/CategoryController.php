@@ -12,7 +12,7 @@ class CategoryController extends Controller
     public function list()
     {
         return Inertia::render('Categories/List', [
-            'categories' => Category::orderBy('order')->get()
+            'categories' => Category::orderBy('order')->get(),
         ]);
     }
 
@@ -37,6 +37,10 @@ class CategoryController extends Controller
 
     public function delete(Category $category)
     {
+        if ($category->products()->count()) {
+            return redirect()->back()->with(['error' => 'Category contains products that are associated with it.']);
+        }
+
         $category->delete();
 
         return redirect()->route('categories.list')->with(['success' => 'Category deleted.']);

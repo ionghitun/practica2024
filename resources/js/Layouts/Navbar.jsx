@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Link} from '@inertiajs/react';
+import {Link, useForm} from '@inertiajs/react';
 import ApplicationLogo from "@/Components/ApplicationLogo.jsx";
 
 export default function Navbar({auth}) {
@@ -7,6 +7,14 @@ export default function Navbar({auth}) {
 
     const handleToggle = () => {
         setNavOpen(!navOpen);
+    };
+
+    const {post} = useForm({});
+
+    const submit = (e) => {
+        e.preventDefault();
+
+        post(route('logout'));
     };
 
     return (<header className="bg-blue-500">
@@ -62,13 +70,12 @@ export default function Navbar({auth}) {
                                     </Link>
                                 </li>
                                 <li>
-                                    <Link
-                                        href={route('logout')}
-                                        method={"POST"}
-                                        className="block py-2 px-3 text-white rounded hover:bg-blue-400"
-                                    >
-                                        Logout
-                                    </Link>
+                                    <form onSubmit={submit}>
+                                        <button
+                                            className="block w-56 py-2 px-3 mx-auto text-white rounded hover:bg-blue-400 mb-6">
+                                            Logout
+                                        </button>
+                                    </form>
                                 </li>
                             </> : <>
                                 <li>
